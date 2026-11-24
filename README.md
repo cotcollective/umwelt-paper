@@ -61,7 +61,7 @@ curl -s "https://doi.org/10.1016/S0893-6080(98)00066-5" -H "Accept: application/
 
 ## Same-day re-run replication + zero-event bounds
 
-Two independent execution windows on 2026-11-24 (same-day re-run; next-day replication = future work). Combined zero-event bounds (rule of three / exact Clopper–Pearson upper 95%): over-grant 0/120 → ≤2.5%; uninstructed fabrication 3/240 (~1.25%, upper ≈2.5%). Full comparison: `artifacts/SUMMARY_INTERDAY.md`.
+Two independent execution windows on 2026-11-24 (same-day re-run; next-day replication = future work). Combined zero-event bounds (rule of three / exact Clopper–Pearson upper 95%): over-grant 0/120 → ≤2.5%; uninstructed fabrication 3/240 (~1.25%, upper ≈2.5%). Full comparison: `artifacts/SUMMARY_SAME_DAY_RERUN.md`.
 
 ## Anonymity
 
