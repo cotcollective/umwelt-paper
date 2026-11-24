@@ -1,0 +1,26 @@
+{
+ "fetched_at": "2026-11-24",
+ "endpoint": "https://ollama.com/v1/models",
+ "study_models_in_listing": [
+  "deepseek-v4.1-flash",
+  "glm-5.3-flash"
+ ],
+ "total_models": 25,
+ "listing_sample_15": [
+  "kimi-k3",
+  "nemotron-3-ultra",
+  "kimi-k2.6",
+  "deepseek-v4.1-flash",
+  "mistral-large-4",
+  "muse-spark-open",
+  "deepseek-v4.1-flash:1017",
+  "gpt-oss:20b",
+  "minimax-m3",
+  "beam",
+  "mimo-v2.6-pro",
+  "gpt-oss:120b",
+  "clef:27b",
+  "glm-5.3",
+  "deepseek-v4-pro:0813"
+ ]
+}
