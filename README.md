@@ -1,6 +1,6 @@
 # UMWELT — Artifact Bundle
 
-**Paper**: *The Selectively Rendered Umwelt: A Token-Economy Analysis of Channel Provenance in LLM Agent Harnesses*
+**Paper**: *Selectively Rendered: A Token-Cost Analysis of Channel Provenance in LLM Agent Harnesses*
 **Author**: Dave Senez (ORCID 0009-0005-3410-323X)
 **Revision**: v4 (responds to two hostile-review rounds; see CHANGELOG in the manuscript)
 
