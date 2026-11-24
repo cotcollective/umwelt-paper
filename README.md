@@ -9,15 +9,15 @@
 | path | description |
 |---|---|
 | `UMWELT_PAPER_v3_REVIEWED.md` | manuscript (v4 text, updated after second review) |
-| `raw/testA_results.jsonl` | local qwen2.5:7b pilot (52 runs; pilot-only, retrieval rates disqualified in §6.2) |
-| `raw/testA_cloud_glm-5.3-flash.jsonl` | Test A retrieval, glm-5.3-flash, 180 runs |
-| `raw/testA_cloud_deepseek-v4.1-flash.jsonl` | Test A retrieval, deepseek-v4.1-flash, 180 runs |
-| `raw/testB_cloud_*.jsonl` | Task B provenance-field extraction (instructed fallback), 2 substrates × 60 |
-| `raw/testBnoinstr_cloud_*.jsonl` | Task B-noinstr (natural calibration, no UNKNOWN instruction), 2 substrates × 60 |
-| `raw/testC_cloud_*.jsonl` | Task C provenance-informed policy decision, 2 substrates × 60 |
-| `raw/SUMMARY_ALL.md` | aggregated tables (Tasks A+B, Wilson CIs) |
-| `raw/SUMMARY_V4.md` | aggregated tables (Tasks B-noinstr + C) |
-| `raw/verified_bibliography_v3.md` | bibliography verification trail (arXiv API + DOI content-negotiation, 2026-11-24) |
+| `artifacts/testA_results.jsonl` | local qwen2.5:7b pilot (52 runs; pilot-only, retrieval rates disqualified in §6.2) |
+| `artifacts/testA_cloud_glm-5.3-flash.jsonl` | Test A retrieval, glm-5.3-flash, 180 runs |
+| `artifacts/testA_cloud_deepseek-v4.1-flash.jsonl` | Test A retrieval, deepseek-v4.1-flash, 180 runs |
+| `artifacts/testB_cloud_*.jsonl` | Task B provenance-field extraction (instructed fallback), 2 substrates × 60 |
+| `artifacts/testBn_cloud_*.jsonl` | Task B-noinstr (natural calibration, no UNKNOWN instruction), 2 substrates × 60 |
+| `artifacts/testC_cloud_*.jsonl` | Task C provenance-informed policy decision, 2 substrates × 60 |
+| `artifacts/SUMMARY_ALL.md` | aggregated tables (Tasks A+B, Wilson CIs) |
+| `artifacts/SUMMARY_V4.md` | aggregated tables (Tasks B-noinstr + C) |
+| `artifacts/verified_bibliography_v3.md` | bibliography verification trail (arXiv API + DOI content-negotiation, 2026-11-24) |
 | `scripts/run_ab_v2.py` | pilot harness (local Ollama, Qwen tokenizer) |
 | `scripts/run_ab_v3_cloud.py` | cloud replication harness (Tasks A+B, 2 substrates) |
 | `scripts/run_ab_v4_policy.py` | review-respond harness (B-noinstr + C) |
@@ -49,7 +49,7 @@ python3 scripts/cross_harness_verify.py --path /path/to/deepseek-harness
 
 ## Bibliography verification note
 
-All arXiv IDs and DOIs were resolved live (arXiv API, doi.org content negotiation) on 2026-11-24; the trail (what was fabricated in v2, what replaced it, with real titles from the API) is in `raw/verified_bibliography_v3.md`. The checks are one-line `curl` re-runnable by any reviewer:
+All arXiv IDs and DOIs were resolved live (arXiv API, doi.org content negotiation) on 2026-11-24; the trail (what was fabricated in v2, what replaced it, with real titles from the API) is in `artifacts/verified_bibliography_v3.md`. The checks are one-line `curl` re-runnable by any reviewer:
 
 ```bash
 curl -s "http://export.arxiv.org/api/query?id_list=2510.09023" | grep -A2 "<title>"
@@ -58,3 +58,11 @@ curl -s "https://doi.org/10.1016/S0893-6080(98)00066-5" -H "Accept: application/
 ```
 
 (Note: `2510.09023` is Nasr & Carlini, "The Attacker Moves Second". A reviewer twice proposed `2410.05295` for the same paper — that identifier resolves to Xiaogeng Liu's "AutoDAN-Turbo"; the claim is incorrect.)
+
+## Same-day re-run replication + zero-event bounds
+
+Two independent execution windows on 2026-11-24 (same-day re-run; next-day replication = future work). Combined zero-event bounds (rule of three / exact Clopper–Pearson upper 95%): over-grant 0/120 → ≤2.5%; uninstructed fabrication 3/240 (~1.25%, upper ≈2.5%). Full comparison: `artifacts/SUMMARY_INTERDAY.md`.
+
+## Anonymity
+
+TMLR operates single-blind, author-identified review by default; the repository carries the author name in the manuscript header. If the target venue enforces double-blind review, this repository is anonymized (author name and ORCID replaced by an anonymized identifier) before submission and deanonymized on acceptance.

@@ -1,10 +1,16 @@
-# Inter-day Replication Summary (round1 2026-11-24 earlier vs round2 same day, later)
+# Same-day re-run replication (two independent execution settings, 2026-11-24 morning vs. afternoon)
+
+**Naming correction (review round 4)**: both execution windows fall on the same calendar day; this is a **same-day re-run**, not an inter-day replication. It controls for provider-side serving variance within the day but **not** for diurnal load shifts, provider deployments, or temporal drift — a next-day replication is named as future work (manuscript §9.4).
+
+**On comparability (reviewer's purge concern)**: the "purge" was an *internal* step of round-1 processing — before the second set, every round-1 JSONL row with an empty provider payload was removed so the resume loop would re-execute those cells at a higher `max_tokens`; the resulting round-1 archive (`round1_backup/`) contains only non-empty round-1 rows. **Round 2 was generated from scratch against empty files** — every round-2 row is a fresh API call, never a rewrite of a round-1 record. The two sets are therefore independent execution windows over identical scripts and prompts; the only asymmetry is that round-1's archived set excludes its empty-output rows (the round-2 set includes them, and reports them).
 
 Raw files: round1 = `round1_backup/*.jsonl` (backup of the earlier set), round2 = `./*.jsonl` (re-generated from scratch after purge, later same day). Scripts reproduce both.
 
 ## Key claim: accuracy-among-responses stays 100% in every rendered condition, both rounds
 
 **Task C — deepseek-v4.1-flash (3-field conjunction decision)**
+
+*Zero-event bound: with 0 events in 120 runs, the exact Clopper–Pearson (rule of three) 95% upper bound on the over-grant rate is ≈2.5%; the claim is "no over-grant observed," not an impossibility guarantee.*
 
 | mode | round1 (correct/non-empty responses, empty, over-grant) | round2 | over-grant cumulative |
 |---|---|---|---|
